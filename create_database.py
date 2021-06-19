@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def main():
+def create_database():
     conn = sqlite3.connect("links.sqlite")
     cur = conn.cursor()
     cur.execute("DROP TABLE IF EXISTS links")
@@ -10,4 +10,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    create_database()

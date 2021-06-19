@@ -19,6 +19,7 @@ import logging
 
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from methods import *
 
 # Enable logging
 logging.basicConfig(
@@ -49,6 +50,32 @@ def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(update.message.text)
 
 
+# Read handler to show stored links
+def read(update: Update, context: CallbackContext) -> None:
+    """Read database and show stored links"""
+    links = database_read()
+    update.message.reply_text(links)
+
+
+# TODO: Find the way to take parameters as input from the chat
+def insert(update: Update, context: CallbackContext) -> None:
+    """Read database and show stored links"""
+    links = database_read()
+    update.message.reply_text(links)
+
+
+def delete(update: Update, context: CallbackContext) -> None:
+    """Read database and show stored links"""
+    links = database_read()
+    update.message.reply_text(links)
+
+
+def database_update(update: Update, context: CallbackContext) -> None:
+    """Read database and show stored links"""
+    links = database_read()
+    update.message.reply_text(links)
+
+
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
@@ -60,6 +87,9 @@ def main() -> None:
     # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(CommandHandler("read", read))
+    dispatcher.add_handler(CommandHandler("insert", insert))
+    dispatcher.add_handler(CommandHandler("delete", delete))
 
     # on non command i.e message - echo the message on Telegram
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
